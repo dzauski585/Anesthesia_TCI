@@ -88,5 +88,3 @@ class Patient:
         """Makes print(patient) useful for debugging."""
         return (f"Patient (age={self.age}, weight={self.weight}, height={self.height}, sex={self.sex})")
 
-p = Patient(age=65, weight=85, height=160, sex='F')
-print(p.summary())
