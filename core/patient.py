@@ -26,17 +26,17 @@ class Patient:
         # ---- Input validation ----
         if not isinstance(age, int):
             raise TypeError("Age must be an integer.")
-        if age < 0:
+        if age <= 0:
             raise ValueError(f"You entered {age}, age must be greater than 0" )
         
         if not isinstance(weight, (int, float)):
             raise TypeError("Weight must be a number in kg.")
-        if weight < 0:
+        if weight <= 0:
             raise ValueError(f"You entered {weight}, weight must be greater than 0" )
         
         if not isinstance(height, (int, float)):
             raise TypeError("Height must be a number in cm.")
-        if height < 0:
+        if height <= 0:
             raise ValueError(f"You entered {height}, height must be greater than 0" )
         
         if not isinstance(sex, str):
@@ -82,7 +82,7 @@ class Patient:
  
     def summary(self) -> str:
         """Return formatted string of all patient parameters."""
-        return (f"Patient: {self.age}yo{self.sex}, {self.weight}kg, {self.height}cm, BMI={self.bmi}, LBM={self.lbm}kg")
+        return (f"Patient: {self.age}yo{self.sex}, {self.weight}kg, {self.height}cm, BMI ={self.bmi: .1f}, LBM ={self.lbm: .2f}kg")
 
     def __repr__(self) -> str:
         """Makes print(patient) useful for debugging."""

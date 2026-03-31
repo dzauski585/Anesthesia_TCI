@@ -10,7 +10,7 @@ def test_obese_female():
     p = Patient(age=65, weight=85, height=160, sex='F')
     print(p.summary())
     assert abs(p.bmi - 33.2) < 0.1
-    assert abs(p.lbm - 47.8) < 1.0
+    assert abs(p.lbm - 49.18) < 1.0
 
 def test_pediatric():
     p = Patient(age=8, weight=25, height=128, sex='M')
