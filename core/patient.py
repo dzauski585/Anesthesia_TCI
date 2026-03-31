@@ -28,14 +28,11 @@ class Patient:
             #TODO
  
         # ---- Store raw parameters ----
-        self.age = age
-        self.weight = weight
-        self.height = height
-        self.sex = sex
- 
+        #TODO
+        
         # ---- Calculate derived values ----
 
-          #Todo
+          #TODO
 
  
     def _calculate_bmi(self) -> float:
@@ -72,5 +69,4 @@ class Patient:
  
     def __repr__(self) -> str:
         """Makes print(patient) useful for debugging."""
-        return (f'Patient(age={self.age}, weight={self.weight}, '
-                f'height={self.height}, sex={self.sex})')
+        #TODO
