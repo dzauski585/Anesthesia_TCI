@@ -53,7 +53,13 @@ class Patient:
         # ---- Calculate derived values ----
         self.bmi = self._calculate_bmi()
         self.lbm = self._calculate_lbm()
-
+        self.ibw = self._calculate_ibw()
+        self.ffm = self._calculate_ffm()
+        
+        self.adjusted_weight = self.ibw + 0.4 * (self.weight - self.ibw) #adjusted body weight for morbid obesity. 
+        #Servin F, Farinotti R, Haberer JP, Desmonts JM. Propofol infusion for maintenance of anesthesia in morbidly obese patients receiving nitrous oxide: a clinical and pharmacokinetic study. 
+        #Anesthesiology. 1993;78(4):657–665.
+        
     def _calculate_bmi(self) -> float:
         """BMI = weight_kg / (height_m)^2"""
         height_m = self.height / 100
@@ -61,13 +67,34 @@ class Patient:
         return bmi
  
     def _calculate_lbm(self) -> float:
-        """Lean Body Mass using the James formula."""
+        """Lean Body Mass using the James formula. For Schneider"""
         if self.sex == "M":
             lbm = 1.1 * self.weight - 128 * (self.weight / self.height) ** 2
         else:
             lbm = 1.07 * self.weight - 148 * (self.weight / self.height) ** 2
         
         return lbm
+    
+    def _calculate_ibw(self) -> float:
+        """Ideal Body Weight using Lemmens formula. Can be used for obese patients. 
+           Lemmens HJM, Brodsky JB, Bernstein DP. Estimating ideal body weight — a new formula. Obes Surg. 2005;15:1082–1083.
+        """
+        height_m = self.height / 100
+        ibw = 22 * (height_m **2)
+        return ibw
+    
+    def _calculate_ffm(self) -> float:
+        """Fat-Free Mass using Al-Sallami formula. For Eleveld.
+        Al-Sallami HS, Goulding A, Grant A, et al. Prediction of fat-free mass in children. Clin Pharmacokinet. 2015;54:1169–1178.
+        """
+        bmi = self.bmi
+        if self.sex == 'M':
+            maturation = 0.88 + ((1 - 0.88) / (1 + (self.age / 13.4) ** (-12.7)))
+            return maturation * (9270 * self.weight / (6680 + 216 * bmi))
+        else:
+            maturation = 1.11 + ((1 - 1.11) / (1 + (self.age / 7.1) ** (-1.1)))
+            return maturation * (9270 * self.weight / (8780 + 244 * bmi))
+
  
     def post_menstrual_age_weeks(self) -> float:
         """

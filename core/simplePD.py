@@ -1,4 +1,4 @@
-class SimplePDModel:
+class simplePD:
     """
     Maps drug concentration to BIS using the Hill equation.
     The Hill equation models receptor saturation: effect increases
