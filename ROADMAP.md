@@ -5,34 +5,6 @@ Two reference patients recur through every step below:
   classic Schnider-paper reference body, useful later too)
 
 
-## Step 2 — Validation
-
-**Practicing:** raising exceptions on purpose (`TypeError` vs.
-`ValueError` — different exception for "wrong kind of thing" vs. "right
-kind of thing, bad value"), `isinstance()`, writing an f-string error
-message that shows the bad value back to the caller.
-
-**Spec:** before storing anything, check each argument and raise if it
-fails:
-- `age` — must be `int` (`TypeError` if not), must be `> 0`
-  (`ValueError` if not)
-- `weight`, `height` — must be `int` or `float` (`TypeError`), must be
-  `> 0` (`ValueError`)
-- `sex` — must be `str` (`TypeError`), must be exactly `"M"` or `"F"`
-  (`ValueError`)
-
-Check type before value for each one — comparing a non-number to `0`
-isn't meaningful, so there's nothing to check until you know it's a
-number.
-
-**Checkpoint:** this is exactly what `test_invalid_age_raises_error` in
-`test_patient.py` already checks — rerun it, it should pass again. Also
-try `Patient(age=40.5, weight=70, height=170, sex="M")` by hand in a
-scratch script: it should raise `TypeError`, not silently round `40.5`
-down.
-
----
-
 ## Step 3 — BMI
 
 **Practicing:** a "private" helper method (leading underscore signals
